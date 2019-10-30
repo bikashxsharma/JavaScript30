@@ -70,12 +70,17 @@
       key.classList.add("playing");
   }
 
-  function removeTransition(e){
+  function removeTransition(e){ // function to remove playing class 
         e.target.classList.remove("playing");
-      } 
+  }
 
-  const keys = Array.from(document.querySelectorAll(".key"));
   
+  const keys = Array.from(document.querySelectorAll(".key"));// taking all the key element as an array and storing to keys
+  
+  keys.forEach( key => key.addEventListener('transitionend', removeTransition)); // calls removeTransition function when transition ends
+
+
+
 
 window.addEventListener("keydown",playSound); // run function when key pressed
 
