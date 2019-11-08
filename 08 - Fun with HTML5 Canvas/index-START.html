@@ -6,59 +6,77 @@
 </head>
 <body>
     <div id="controller">
-        <div class="colors">
-          <ul>
-            <li> Red</li>
-            <li> Green</li>
-            <li> Blue</li>
-      
-          </ul>
+     
+        <div class="controller-left"><h3>Drawing App</h3>
+          
         </div>
+        <div class="colors">
+         <span>Select color:</span> <input  id="base" type="color" name="color" value="#FF0000"></input>
+         <span>Select stroke width:</span><input id="spacing" type="range" name="spacing" min="2" max="40" value="2" data-sizing="px"> <span>in PX</span>
+          
+        </div> 
+      </div>
 <canvas id="draw" width="800" height="800"></canvas>
 
 <script>
- const canvas = document.querySelector("#draw");
- const ctx = canvas.getContext("2d");
+    const canvas = document.querySelector("#draw");
+    const ctx = canvas.getContext("2d");
+    // resize the canvas programmatically
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+    // variable checking if it should paint or not
+    let painting = false; // initially false
+    // variable for color and stroke width 
 
- // resize the canvas programmatically
- canvas.height = window.innerHeight;
- canvas.width = window.innerWidth;
+    let colorValue = "#FF0000" ; 
+    let strokeWidth = 10 ; 
 
- // variable checking if it should paint or not
+     function startPaint(e){ // changes painting status to true
+       
+        painting = true;
+        draw(e);
+        
+         } 
+     function endPaint(){  // reset the begining path after mouse is up
+       painting = false;
+       ctx.beginPath(); 
+       
+       } // disable painting
+     // main drawing funciton 
+     function draw(e){
+       if(!painting) return; 
+       
+       ctx.lineWidth = strokeWidth; 
+       ctx.lineCap = "round"; 
+       ctx.lineTo(e.clientX, e.clientY);
+       ctx.stroke();
+       ctx.strokeStyle = colorValue;
+     }
+     // function to handle update when user changes color or stroke
 
- let painting = false; // initially false
+     function handleUpdate(){
+       
+         
+          colorValue = `${this.value}`; 
 
-  function startPaint(e){ // changes painting status to true
-    
-     painting = true;
-     draw(e);
-     
-      } 
-  function endPaint(){  // reset the begining path after mouse is up
-    painting = false;
-    ctx.beginPath(); 
-    
-    } // disable painting
+          strokeWidth = this.value;
+     }
 
-  // main drawing funciton 
+   // event listners assigns to mouse and keyboard action
+   canvas.addEventListener('mousemove', draw);
+   canvas.addEventListener('mousedown', startPaint);
+   canvas.addEventListener('mouseup', endPaint);
+   canvas.addEventListener('mouseout',endPaint);
 
-  function draw(e){
-    if(!painting) return; 
-    
-    ctx.lineWidth = 10; 
-    ctx.lineCap = "round"; 
-    ctx.lineTo(e.clientX, e.clientY);
-    ctx.stroke();
-  }
+  // getting controller and listening their event
 
-// event listners assigns to mouse and keyboard action
-canvas.addEventListener('mousemove', draw);
-canvas.addEventListener('mousedown', startPaint);
-canvas.addEventListener('mouseup', endPaint);
-canvas.addEventListener('mouseout',endPaint);
+  const inputs = document.querySelectorAll(".colors input");
+  
+  inputs.forEach(input => input.addEventListener("change", handleUpdate));
+  inputs.forEach(input => input.addEventListener("mousemove", handleUpdate));
 
 
-</script>
+   </script>
 
 <style>
   html, body {
@@ -66,6 +84,32 @@ canvas.addEventListener('mouseout',endPaint);
   }
   #draw{
     border:1px solid red;
+
+  }
+  #controller{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    background-color: rgb(160, 238, 212);
+
+  }
+  .controller-left{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    padding : 0 10px 0 10px;
+    margin : 0 10px 0 10px;
+  }
+  .colors span{
+    font-size: 18px;
+    font-weight: 600;
+    padding: 9px;
+  }
+  .colors input{
+    display:inline-block;
+    align-items: center;
 
   }
 </style>
