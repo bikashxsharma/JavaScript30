@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Key Detection</title>
+  <script type="text/javascript" src="https://www.cornify.com/js/cornify.js"></script>
+  <style>
+  .total {
+   width:100%;
+   padding:20px;
+   text-align:center;
+   font-size:20px;
+   color:azure;
+
+  }
+  
+  </style>
+</head>
+<body>
+<div class="total">
+    Let say this
+</div>
+<script>
+
+ // create an empty array to record all the keys pressed
+
+ const pressed = [];
+ const secretWord = "bikash";
+ let matching=""; 
+ const textArea = document.querySelector(".total");  
+window.addEventListener("keydown",  (e)=> {
+
+        pressed.push(e.key);
+        pressed.splice(-secretWord.length-1, pressed.length-secretWord.length); 
+        console.log(pressed.join(""));
+        matching = pressed.join("");
+        textArea.innerHTML = `<p>${matching}</p>`;
+        if(matching.includes(secretWord)){
+
+            textArea.style.backgroundColor="blue";
+            cornify_add();
+           
+
+        }
+
+    
+    })
+
+
+
+
+</script>
+</body>
+</html>
