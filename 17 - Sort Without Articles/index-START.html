@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sort Without Articles</title>
+</head>
+<body>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: url("https://source.unsplash.com/nDqA4d5NL0k/2000x2000");
+      background-size: cover;
+      display: flex;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    #bands {
+      list-style: inside square;
+      font-size: 20px;
+      background: white;
+      width: 500px;
+      margin: auto;
+      padding: 0;
+      box-shadow: 0 0 0 20px rgba(0, 0, 0, 0.05);
+    }
+    
+    #bands li {
+      border-bottom: 1px solid #efefef;
+      padding: 20px;
+    }
+    
+    #bands li:last-child {
+      border-bottom: 0;
+    }
+
+    a {
+      color: #ffc600;
+      text-decoration: none;
+    }
+
+  </style>
+
+  <ul id="bands"></ul>
+
+<script>
+const bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
+const bandElement = document.getElementById("bands");
+// changes to lowercase, compares after removing article
+function compare(a, b){
+  let aTitle = a.toLowerCase(); 
+  let bTitle = b.toLowerCase();
+
+  aTitle = removeArticle(aTitle);
+  bTitle = removeArticle(bTitle);
+ // console.log(aTitle+" "+bTitle);
+
+  if(aTitle < bTitle) return -1;
+  if(aTitle > bTitle) return 1;
+ 
+  return 0;
+
+  }
+
+// remove article, if word length is 1, no need, if more start from 1 index and join with space
+function removeArticle(str){
+
+  let word = str.split(" ");
+    if(word.length <= 0) return str; // check the length of the word is 1
+    if(word[0] =="a" || word[0]=="an" || word[0]=="the"){
+       return word.splice(1).join(" ");
+     }
+     return str;  
+
+
+  } 
+let finalSorted = bands.sort(compare); // actual sorting
+
+// add sorted values to HTML li element
+
+
+bandElement.innerHTML = finalSorted.map(band => `<li>${band}</li>`).join("");
+
+
+
+
+
+
+</script>
+
+</body>
+</html>
