@@ -20,6 +20,7 @@ h1 {
   line-height: 1;
   margin-bottom: 0;
 }
+
 h2 {
   text-align: center;
   font-size: 3rem;
@@ -33,18 +34,21 @@ h3 {
   margin-bottom: 0;
 }
 
+
 .score {
   background: rgba(255,255,255,0.2);
   padding: 0 3rem;
   line-height: 1;
   border-radius: 1rem;
 }
+
 .high-score {
   background: rgba(255,255,255,0.2);
   padding: 0 3rem;
   line-height: 1;
   border-radius: 1rem;
 }
+
 
 .game {
   width: 600px;
@@ -85,6 +89,7 @@ h3 {
 .hole.up .mole {
   top: 0;
 }
+
 .difficulty-level{
   padding: 10px 10px;
   }
@@ -97,3 +102,4 @@ h3 {
 .difficulty-level-active{
   background-color: aqua;
 }
+
