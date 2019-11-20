@@ -58,7 +58,7 @@
   let difficulty = 300;
   let difficultyTop = 700;
   let highScore = localStorage.getItem("score", 0); // getting from local storage
-  highScoreBoard.textContent = highScore;
+  highScoreBoard.textContent = highScore; // setting highest score and displaying it.
   
 
   // check the difficulty level and set level as well as active button color
@@ -86,8 +86,7 @@
      mediumLevel.classList.remove("difficulty-level-active");
      hardLevel.classList.add("difficulty-level-active");
   })
-  
-  // getting previous highScore
+
 
   // get random number between given interval
   function randomTime (min, max ){
@@ -134,7 +133,7 @@
     if ( score > highScore){
       highScore = score;
       highScoreBoard.textContent = highScore;
-      localStorage.setItem("score", highScore);
+      localStorage.setItem("score", highScore); // update new highscore in local storage
     }
 
   }
